@@ -89,7 +89,7 @@ export default function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${API_BASE}/tingee/payments`);
+      const response = await fetch(`${API_BASE}/local/sepay/payments`);
       if (response.ok) {
         const data = await response.json();
         console.log(data);
@@ -404,7 +404,7 @@ export default function App() {
             <div style={styles.statusDot} />
             <span style={styles.systemLive}>Hệ thống đang hoạt động</span>
           </div>
-          <h1 style={styles.title}>Lịch sử tạo qrcode Tingee</h1>
+          <h1 style={styles.title}>Lịch sử tạo qrcode Sepay</h1>
           <p style={styles.syncText}>
             {lastUpdated ? `Cập nhật lần cuối: ${lastUpdated.toLocaleTimeString()}` : 'Đang đồng bộ...'}
           </p>
@@ -550,20 +550,20 @@ export default function App() {
       <footer style={styles.footer}>
         <div style={styles.footerStats}>
           <div style={styles.statItem}>
-            <span style={styles.statLabel}>Total Volume </span>
+            <span style={styles.statLabel}>Tổng khối lượng</span>
             <span style={styles.statValue}>
               {formatCurrency(filteredHistory.reduce((acc, curr) => acc + (curr.amount || 0), 0))}
             </span>
           </div>
           <div style={styles.statItem}>
-            <span style={styles.statLabel}>Records </span>
+            <span style={styles.statLabel}>Số bản ghi: </span>
             <span style={styles.statValue}> {filteredHistory.length}</span>
           </div>
         </div>
 
         <div style={styles.apiStatus}>
           <div style={styles.apiDot} />
-          <span style={styles.apiLabel}>API Connected</span>
+          <span style={styles.apiLabel}>Đã kết nối API</span>
         </div>
       </footer>
     </div>
