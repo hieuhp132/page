@@ -462,7 +462,7 @@ export default function App() {
         {/* Data Grid Header */}
         <div style={styles.gridHeader}>
           <span style={styles.gridHeaderLabel}>ID</span>
-          <span style={styles.gridHeaderLabel}>Người gửi / Nội dung</span>
+          <span style={styles.gridHeaderLabel}>Người gửi</span>
           <span style={styles.gridHeaderLabel}>Số tài khoản</span>
           <span style={styles.gridHeaderLabel}>Ngân hàng</span>
           <span style={styles.gridHeaderLabel}>Số tiền</span>
@@ -506,15 +506,15 @@ export default function App() {
 
                     <div style={styles.senderContent}>
                       <div style={styles.senderName}>
-                        {payment.senderName || 'Anonymous User'}
+                        {payment.senderAccountName || 'Anonymous User'}
                       </div>
-                      <span style={styles.content(isHovered)}>
+                      {/* <span style={styles.content(isHovered)}>
                         {payment.purpose || 'No description provided'}
-                      </span>
+                      </span> */}
                     </div>
 
                     <div style={styles.bankAccount}>
-                      <BankLogo bankAccount={payment.bankAccount} isHovered={isHovered} />
+                      <BankLogo bankAccount={payment.senderAccountNr} isHovered={isHovered} />
                     </div>
                     <div style={styles.bank}>
                       {payment.bankName}
