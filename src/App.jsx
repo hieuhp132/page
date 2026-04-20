@@ -1,5 +1,5 @@
 /**
- * 💳 Payment Dashboard - Table View (Fixed senderBank)
+ * 💳 Payment Dashboard - Table View (Final Clean)
  */
 
 import { useState, useEffect, useCallback } from 'react';
@@ -101,54 +101,60 @@ export default function App() {
     <div style={{
       background: '#020617',
       minHeight: '100vh',
-      color: '#fff',
+      color: '#e2e8f0',
       padding: 20,
       fontFamily: 'Inter, sans-serif'
     }}>
 
       {/* HEADER */}
-      <h1 style={{ fontSize: 26, marginBottom: 20 }}>
+      <h1 style={{
+        fontSize: 26,
+        marginBottom: 20,
+        fontWeight: 700
+      }}>
         💳 Payment Dashboard
       </h1>
 
       {/* SEARCH */}
       <input
-        placeholder="🔍 Tìm kiếm..."
+        placeholder="🔍 Tìm kiếm theo tên, order, id..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         style={{
           width: '100%',
-          padding: 10,
+          padding: 12,
           marginBottom: 20,
-          borderRadius: 8,
+          borderRadius: 10,
           border: '1px solid #1e293b',
           background: '#020617',
-          color: '#fff'
+          color: '#fff',
+          outline: 'none'
         }}
       />
 
       {/* TABLE */}
       <div style={{
         border: '1px solid #1e293b',
-        borderRadius: 10,
+        borderRadius: 12,
         overflow: 'hidden'
       }}>
 
         {/* HEADER */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1.5fr 1.5fr 1fr 1fr 1.2fr 1.2fr 1.2fr 1fr',
-          padding: 12,
+          gridTemplateColumns: '1fr 1.5fr 1.5fr 1.2fr 1.2fr 1fr 1.2fr 1.2fr 1.2fr 1fr',
+          padding: 14,
           background: '#020617',
           borderBottom: '1px solid #1e293b',
           fontSize: 12,
-          color: '#64748b',
+          color: '#94a3b8',
           fontWeight: 600
         }}>
           <div>ID</div>
           <div>Người gửi</div>
           <div>Tài khoản</div>
           <div>Ngân hàng</div>
+          <div>VA</div> {/* ✅ NEW */}
           <div>Số tiền</div>
           <div>Tạo lúc</div>
           <div>Hết hạn</div>
@@ -160,15 +166,17 @@ export default function App() {
         {loading ? (
           <div style={{ padding: 20 }}>Loading...</div>
         ) : (
-          filtered.map(p => (
+          filtered.map((p, i) => (
             <div key={p.id}
               style={{
                 display: 'grid',
-                gridTemplateColumns: '1fr 1.5fr 1.5fr 1fr 1fr 1.2fr 1.2fr 1.2fr 1fr',
-                padding: 12,
+                gridTemplateColumns: '1fr 1.5fr 1.5fr 1.2fr 1.2fr 1fr 1.2fr 1.2fr 1.2fr 1fr',
+                padding: 14,
                 borderBottom: '1px solid #020617',
                 fontSize: 13,
-                alignItems: 'center'
+                alignItems: 'center',
+                background: i % 2 === 0 ? '#020617' : '#020617',
+                transition: '0.2s'
               }}
             >
 
@@ -176,14 +184,25 @@ export default function App() {
                 {p.id.toString().slice(-6)}
               </div>
 
-              <div>{p.senderName}</div>
+              <div style={{ fontWeight: 500 }}>
+                {p.senderName}
+              </div>
 
               <div style={{ color: '#94a3b8' }}>
                 {p.senderAccount}
               </div>
 
-              <div style={{ color: '#64748b' }}>
+              <div style={{ color: '#94a3b8' }}>
                 {p.senderBank}
+              </div>
+
+              {/* ✅ VA NUMBER */}
+              <div style={{
+                fontFamily: 'monospace',
+                fontSize: 12,
+                color: '#38bdf8'
+              }}>
+                {p.vaNumber}
               </div>
 
               <div style={{
@@ -210,8 +229,15 @@ export default function App() {
       </div>
 
       {/* FOOTER */}
-      <div style={{ marginTop: 20 }}>
-        Tổng: {formatCurrency(filtered.reduce((a, b) => a + b.amount, 0))}
+      <div style={{
+        marginTop: 20,
+        padding: 15,
+        border: '1px solid #1e293b',
+        borderRadius: 12,
+        background: '#020617'
+      }}>
+        <b>Tổng: </b>
+        {formatCurrency(filtered.reduce((a, b) => a + b.amount, 0))}
       </div>
 
     </div>
